@@ -62,8 +62,8 @@ public class Spell implements Serializable {
 	@Column(name = "saving_throw")
 	private String savingThrow;
 
-	@Column(name = "magic_resistance")
-	private boolean magicResistance;
+	@Column(name = "is_resistable")
+	private boolean resistable;
 
 	@Column(name = "description")
 	private String description;

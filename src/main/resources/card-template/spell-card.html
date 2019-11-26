@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link href="../lib/bulma.min.css" rel="stylesheet"/>
+    <link href="../static/css/spellcard.css" rel="stylesheet">
     <title>${card.name}</title>
 </head>
 <body>
 
-<div id="spell-title">
+<div class="spellcard columns">
+    <div class="card face column">
+        <div class="card-header">
+            <div class="spell-class-rank">
+                1
+            </div>
+        </div>
+        <div class="card-header">
+            <p class="card-header-title">
+                ${card.name}
+            </p>
+        </div>
+        <div>${card.parameters}</div>
+    </div>
 
-</div>
-
-<div id="spell-params">
-
-</div>
-
-<div id="description">
-
+    <div class="card back column">
+        <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Phasellus nec iaculis mauris.
+        </div>
+    </div>
 </div>
 
 </body>
