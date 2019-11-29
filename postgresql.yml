@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  pf_spellbook-postgresql:
+    image: postgres:10-alpine
+    restart: unless-stopped
+    volumes:
+      - pf_spellbook_postgres_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=pf_spellbook
+      - POSTGRES_PASSWORD=pf_spellbook_Passw0rd
+      - POSTGRES_DB=pf_spellbook
+    ports:
+      - 5431:5432
+volumes:
+  pf_spellbook_postgres_volume:
