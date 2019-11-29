@@ -17,11 +17,16 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
+        <spring-boot.version>2.1.8.RELEASE</spring-boot.version>
         <hibernate-java8.version>5.0.12.Final</hibernate-java8.version>
         <postgresql.version>9.4-1206-jdbc4</postgresql.version>
-        <flyway.version>5.2.0</flyway.version>
         <lombok.version>1.16.18</lombok.version>
         <feign.version>1.3.6.RELEASE</feign.version>
+
+        <hibernate-core.version>5.3.8.Final</hibernate-core.version>
+        <javassist.version>3.23.2-GA</javassist.version>
+        <liquibase.version>3.6.3</liquibase.version>
+        <liquibase-hibernate5.version>3.6</liquibase-hibernate5.version>
     </properties>
 
     <dependencies>
@@ -38,6 +43,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-java8</artifactId>
@@ -75,17 +84,6 @@
             <version>20160810</version>
         </dependency>
         <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
@@ -109,6 +107,12 @@
     </dependencies>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -153,6 +157,14 @@
                     </execution>
                 </executions>
             </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.liquibase</groupId>-->
+<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
+<!--                <version>${liquibase.version}</version>-->
+<!--                <configuration>-->
+<!--                    <propertyFile>src/main/resources/config/liquibase/liquibase.properties</propertyFile>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
         </plugins>
     </build>
 

@@ -32,11 +32,14 @@ public class Spell implements Serializable {
 	private Long id;
 
 	@Column(name = "name")
-	private Long name;
+	private String name;
 
 	@Column(name = "magic_school")
 	@Enumerated(EnumType.STRING)
 	private MagicSchool school;
+
+	@Column(name = "sub_school")
+	private String subSchool;
 
 	@OneToMany(mappedBy = "spell", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<SpellClassRank> classRanks;

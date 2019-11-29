@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="00000000000000-1" author="ShayHulud">
+        <createTable tableName="spell">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="magic_school" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="sub_school" type="varchar"/>
+            <column name="cast_time" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="distance" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="effect" type="varchar"/>
+            <column name="target" type="varchar"/>
+            <column name="duration" type="varchar"/>
+            <column name="saving_throw" type="varchar"/>
+            <column name="is_resistable" type="boolean"/>
+            <column name="description" type="varchar"/>
+        </createTable>
+
+        <addUniqueConstraint tableName="spell" columnNames="name"/>
+    </changeSet>
+
+    <changeSet id="00000000000000-2" author="ShayHulud">
+        <createTable tableName="spell_class_rank">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="spell_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="play_class" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rank" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="spell_id"
+                                 baseTableName="spell_class_rank"
+                                 constraintName="fk_spell_class_rank_spell"
+                                 referencedColumnNames="id"
+                                 referencedTableName="spell"/>
+    </changeSet>
+
+    <changeSet id="00000000000000-3" author="ShayHulud">
+        <createTable tableName="spell_component">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="spell_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="component" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reagent" type="varchar">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="spell_id"
+                                 baseTableName="spell_component"
+                                 constraintName="fk_spell_component_spell"
+                                 referencedColumnNames="id"
+                                 referencedTableName="spell"/>
+    </changeSet>
+
+</databaseChangeLog>

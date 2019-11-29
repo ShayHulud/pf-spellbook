@@ -9,7 +9,38 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum MagicSchool {
 
-	DESTRUCTION("разрушение");
+	/**
+	 * Destruction school.
+	 */
+	DESTRUCTION("разрушение"),
+	/**
+	 * Illusion school.
+	 */
+	ILLUSION("иллюзия"),
+	/**
+	 * Embodiment school.
+	 */
+	EMBODIMENT("воплощение"),
+	/**
+	 * Necromancy school.
+	 */
+	NECROMANCY("некромантия"),
+	/**
+	 * Charm school.
+	 */
+	CHARM("очарование"),
+	/**
+	 * Transmutation school.
+	 */
+	TRANSMUTATION("превращение"),
+	/**
+	 * Obstruction school.
+	 */
+	OBSTRUCTION("преграждение"),
+	/**
+	 * Prophecy school.
+	 */
+	PROPHECY("прорицания");
 
 	@Getter
 	private final String ruName;
