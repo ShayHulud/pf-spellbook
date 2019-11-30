@@ -1,6 +1,9 @@
 package ru.shayhulud.pfspellbook.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.shayhulud.pfspellbook.domain.enumiration.Component;
 
 import java.io.Serializable;
@@ -22,6 +25,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "spell_component")
+@AllArgsConstructor
+@NoArgsConstructor
 public class SpellComponent implements Serializable {
 
 	@Id
@@ -31,6 +36,7 @@ public class SpellComponent implements Serializable {
 
 	@ManyToOne
 	@JoinColumn(name = "spell_id")
+	@JsonIgnoreProperties("components")
 	private Spell spell;
 
 	@Column(name = "component")

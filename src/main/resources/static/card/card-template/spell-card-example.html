@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../lib/bulma.min.css" rel="stylesheet"/>
+    <link href="../css/spellcard.css" rel="stylesheet">
+    <title>${card.name}</title>
+</head>
+<body>
+
+<div class="spellcard columns">
+    <div class="card face column scroll-texture-0">
+        <div class="card-header">
+            <div class="flagpole">
+                <div class="spell-class-rank">
+                    1
+                </div>
+                <div class="spell-class-rank">
+                    2
+                </div>
+                <div class="spell-class-rank">
+                    3
+                </div>
+                <div class="spell-class-rank">
+                    4
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <p class="card-header-title">
+                ${card.name}
+            </p>
+        </div>
+        <div class="spell-params">${card.parameters}</div>
+    </div>
+
+    <div class="card back column scroll-texture-0">
+        <div class="spell-description">
+            <div class="content">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Phasellus nec iaculis mauris.
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,6 +1,8 @@
 package ru.shayhulud.pfspellbook.domain.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.shayhulud.pfspellbook.domain.enumiration.MagicSchool;
 
 import java.io.Serializable;
@@ -24,6 +26,8 @@ import javax.persistence.Table;
 @Data
 @Entity
 @Table(name = "spell")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Spell implements Serializable {
 
 	@Id
