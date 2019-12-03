@@ -31,7 +31,7 @@ public class SpellCardController {
 
 		);
 		Set<SpellClassRank> spellClassRanks = new HashSet<>(Arrays.asList(
-			new SpellClassRank(2L, spell, PlayClass.BARBARIAN, 1),
+			new SpellClassRank(2L, spell, PlayClass.PRIEST, 5),
 			new SpellClassRank(3L, spell, PlayClass.DRUID, 2)
 		));
 		Set<SpellComponent> spellComponents = new HashSet<>(Arrays.asList(new SpellComponent(3L, spell, Component.FOCUS_ITEM, null)));
@@ -40,7 +40,7 @@ public class SpellCardController {
 
 		model.addAttribute("spell", spell);
 		model.addAttribute("playClasses", PlayClass.values());
-		model.addAttribute("playClassColor", null);
+//		model.addAttribute("playClassColor", null);
 		return "spell-card";
 	}
 }

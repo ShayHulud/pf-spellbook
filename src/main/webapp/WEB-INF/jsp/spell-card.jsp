@@ -6,6 +6,7 @@
     <link href="./lib/bulma.min.css" rel="stylesheet"/>
     <link href="./css/spellcard.css" rel="stylesheet">
     <title>${spell.name}</title>
+    <script src="https://kit.fontawesome.com/ee8c5603b4.js" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -15,42 +16,45 @@
             <div class="flagpole">
                 <c:forEach items="${spell.classRanks}" var="classRank">
                     <c:choose>
-                        <c:when test="${classRank.playClass == PlayClass.PRIEST}">
-                            <c:set var="playClassColor" value="#ffffff"/>
+                        <c:when test="${classRank.playClass eq 'PRIEST'}">
+                            <c:set var="playClassColor" value="#cccccc"/>
                         </c:when>
-                        <c:when test="${classRank.playClass == PlayClass.BARD}">
+                        <c:when test="${classRank.playClass eq 'BARD'}">
                             <c:set var="playClassColor" value="#0003a8"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.BARBARIAN}">
+                        <c:when test="${classRank.playClass eq 'BARBARIAN'}">
                             <c:set var="playClassColor" value="#940000"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.WARRIOR}">
+                        <c:when test="${classRank.playClass eq 'WARRIOR'}">
                             <c:set var="playClassColor" value="#734900"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.WIZARD}">
+                        <c:when test="${classRank.playClass eq 'WIZARD'}">
                             <c:set var="playClassColor" value="#00bfe6"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.DRUID}">
+                        <c:when test="${classRank.playClass eq 'DRUID'}">
                             <c:set var="playClassColor" value="#f58f00"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.MONK}">
+                        <c:when test="${classRank.playClass eq 'MONK'}">
                             <c:set var="playClassColor" value="#00f5bc"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.PALADIN}">
+                        <c:when test="${classRank.playClass eq 'PALADIN'}">
                             <c:set var="playClassColor" value="#fa89eb"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.ROUGE}">
+                        <c:when test="${classRank.playClass eq 'ROUGE'}">
                             <c:set var="playClassColor" value="#dec400"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.RANGER}">
+                        <c:when test="${classRank.playClass eq 'RANGER'}">
                             <c:set var="playClassColor" value="#008f00"/>
                         </c:when>
-                        <c:when test="${classRank.playClass eq PlayClass.SORCERER}">
+                        <c:when test="${classRank.playClass eq 'SORCERER'}">
                             <c:set var="playClassColor" value="#5d00a8"/>
                         </c:when>
+                        <c:otherwise>
+                            <c:set var="playClassColor" value="#000000"/>
+                        </c:otherwise>
                     </c:choose>
-                    <div class="spell-class-rank" style="background-color:${playClassColor}">
-                            ${classRank.rank}
+                    <div class="fas fa-bookmark spell-class-rank" style="color:${playClassColor}">
+                        <span>${classRank.rank}</span>
                     </div>
                 </c:forEach>
             </div>

@@ -37,25 +37,22 @@
 }
 
 .spell-class-rank {
-    background-color: purple;
+    color: black;
+    font-size: 20pt;
+}
 
-    font-size: 13px;
-    display: inline-block;
-    color: white;
-    width: 20px;
-    text-align: center;
-
+.fas {
     position: relative;
 }
 
-.spell-class-rank:after {
-    content: "";
-    display: block;
-    border: purple 10px solid;
-    border-bottom-color: transparent;
-    border-top-color: transparent;
+.fas span {
     position: absolute;
-    bottom: -10px;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 10pt;
+    font-family: Arial;
 }
 
 .flagpole {
