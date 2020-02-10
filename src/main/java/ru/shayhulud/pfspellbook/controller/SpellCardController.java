@@ -13,6 +13,8 @@ import ru.shayhulud.pfspellbook.domain.model.SpellComponent;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,9 +32,18 @@ public class SpellCardController {
 			"1", null, null, null, null, true, "example description"
 
 		);
-		Set<SpellClassRank> spellClassRanks = new HashSet<>(Arrays.asList(
+		List<SpellClassRank> spellClassRanks = new LinkedList<>(Arrays.asList(
 			new SpellClassRank(2L, spell, PlayClass.PRIEST, 5),
-			new SpellClassRank(3L, spell, PlayClass.DRUID, 2)
+			new SpellClassRank(3L, spell, PlayClass.DRUID, 2),
+			new SpellClassRank(3L, spell, PlayClass.BARBARIAN, 2),
+			new SpellClassRank(3L, spell, PlayClass.BARD, 2),
+			new SpellClassRank(3L, spell, PlayClass.MONK, 2),
+			new SpellClassRank(3L, spell, PlayClass.PALADIN, 2),
+			new SpellClassRank(3L, spell, PlayClass.RANGER, 2),
+			new SpellClassRank(3L, spell, PlayClass.SORCERER, 2),
+			new SpellClassRank(3L, spell, PlayClass.ROUGE, 2),
+			new SpellClassRank(3L, spell, PlayClass.WARRIOR, 2),
+			new SpellClassRank(3L, spell, PlayClass.WIZARD, 2)
 		));
 		Set<SpellComponent> spellComponents = new HashSet<>(Arrays.asList(new SpellComponent(3L, spell, Component.FOCUS_ITEM, null)));
 		spell.setClassRanks(spellClassRanks);

@@ -15,6 +15,11 @@
     vertical-align: top;
 }
 
+.columns {
+    margin-top: 0;
+    display: flex;
+}
+
 .face {
     width: 210px;
     /*10cm x 72 dpi*/
@@ -30,6 +35,10 @@
 .spell-class-rank {
     color: black;
     font-size: 20pt;
+}
+
+.card-header-title {
+    padding: 0.25rem;
 }
 
 .fas {

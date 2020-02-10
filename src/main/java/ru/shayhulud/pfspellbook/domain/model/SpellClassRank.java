@@ -46,4 +46,14 @@ public class SpellClassRank implements Serializable {
 	@Column(name = "rank")
 	private Integer rank;
 
+	@Override
+	public String toString() {
+		return "SpellClassRank{" +
+			"id=" + getId() +
+			", spell='" + getSpell().getId() + "'" +
+			", playClass='" + getPlayClass() + "'" +
+			", rank='" + getRank() + "'" +
+			"}";
+	}
+
 }

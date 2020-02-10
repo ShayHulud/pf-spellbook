@@ -45,4 +45,14 @@ public class SpellComponent implements Serializable {
 
 	@Column(name = "reagent")
 	private String reagent;
+
+	@Override
+	public String toString() {
+		return "SpellClassRank{" +
+			"id=" + getId() +
+			", spell='" + getSpell().getId() + "'" +
+			", component='" + getComponent() + "'" +
+			", reagent='" + getReagent() + "'" +
+			"}";
+	}
 }

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import ru.shayhulud.pfspellbook.domain.enumiration.MagicSchool;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -46,7 +47,7 @@ public class Spell implements Serializable {
 	private String subSchool;
 
 	@OneToMany(mappedBy = "spell", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<SpellClassRank> classRanks;
+	private List<SpellClassRank> classRanks;
 
 	@Column(name = "cast_time")
 	private String castTime;
@@ -75,5 +76,21 @@ public class Spell implements Serializable {
 	@Column(name = "description")
 	private String description;
 
-
+	@Override
+	public String toString() {
+		return "Spell{" +
+			"id=" + getId() +
+			", name='" + getName() + "'" +
+			", school='" + getSchool() + "'" +
+			", subSchool='" + getSubSchool() + "'" +
+			", castTime='" + getCastTime() + "'" +
+			", distance='" + getDistance() + "'" +
+			", effect='" + getEffect() + "'" +
+			", target='" + getTarget() + "'" +
+			", duration='" + getDuration() + "'" +
+			", savingThrow='" + getSavingThrow() + "'" +
+			", resistable='" + isResistable() + "'" +
+			", description='" + getDescription() + "'" +
+			"}";
+	}
 }
