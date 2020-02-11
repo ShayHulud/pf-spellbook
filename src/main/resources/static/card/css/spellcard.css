@@ -1,0 +1,106 @@
+
+.spellcard {
+    /*14cm x 72 dpi*/
+    width: 420px;
+    /*10cm x 72 dpi*/
+    height: 300px;
+}
+
+.card {
+    box-shadow: unset;
+    border: black 1px solid;
+    border-radius: 4%;
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.columns {
+    margin: 0;
+    display: flex;
+}
+
+.face {
+    width: 210px;
+    /*10cm x 72 dpi*/
+    height: 300px;
+}
+
+.back {
+    width: 210px;
+    /*10cm x 72 dpi*/
+    height: 300px;
+}
+
+.spell-class-rank {
+    color: black;
+    font-size: 20pt;
+}
+
+.card-header-title {
+    padding: 0.25rem;
+}
+
+.fas {
+    position: relative;
+}
+
+.fas span {
+    position: absolute;
+    top: 3px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 10pt;
+    font-family: Arial;
+}
+
+.flagpole {
+    margin-left: 2%;
+    margin-right: 2%;
+    border-top: #7d4d1e 2px solid;
+    border-radius: 2px;
+    font-size: 3px;
+}
+
+.card:after {
+    top: 7px;
+    left: 7px;
+    position: absolute;
+    content: "";
+    display: block;
+    border: black 1px solid;
+    border-radius: 50%;
+    height: 20px;
+    width: 20px;
+    background: white;
+}
+
+.card.face:after {
+    left: unset;
+    right: 7px;
+}
+
+.spell-params {
+    padding: 5px;
+    font-size: 11px;
+}
+
+.spell-description {
+    padding: 5px;
+    margin-top: 25px;
+    font-size: 11px;
+}
+
+.scroll-texture-0 {
+    background-image: url(../texture/scroll-texture-0.jpg);
+    background-repeat: repeat;
+}
+
+/*
+    TODO: make choosable background
+ */
+.scroll-texture-1 {
+    background-image: url(../texture/scroll-texture-1.jpg);
+    background-repeat: repeat;
+}

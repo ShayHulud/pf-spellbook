@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 
@@ -13,7 +14,7 @@ import java.util.Collections;
  * Main App.
  */
 @SpringBootApplication
-public class PfSpellbookApplication {
+public class PfSpellbookApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PfSpellbookApplication.class, args);

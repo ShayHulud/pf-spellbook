@@ -104,6 +104,18 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -157,14 +169,6 @@
                     </execution>
                 </executions>
             </plugin>
-<!--            <plugin>-->
-<!--                <groupId>org.liquibase</groupId>-->
-<!--                <artifactId>liquibase-maven-plugin</artifactId>-->
-<!--                <version>${liquibase.version}</version>-->
-<!--                <configuration>-->
-<!--                    <propertyFile>src/main/resources/config/liquibase/liquibase.properties</propertyFile>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
         </plugins>
     </build>
 
