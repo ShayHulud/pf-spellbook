@@ -92,6 +92,7 @@ public class SpellResource {
 		return this.spellService.getById(id);
 	}
 
+	//TODO: add logs
 	@ExceptionHandler({SpellUpdateException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, String> handle400(APIException e) {

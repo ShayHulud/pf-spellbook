@@ -25,6 +25,8 @@ public class SpellService {
 		if (input.getId() != null) {
 			throw new SpellCreationException("spell id exists");
 		}
+		input.getComponents().forEach(_component -> _component.setSpell(input));
+		input.getClassRanks().forEach(_classRank -> _classRank.setSpell(input));
 		Spell result = this.spellRepository.save(input);
 		log.info("New spell was created: {}", result);
 		return result;
@@ -35,6 +37,8 @@ public class SpellService {
 		if (input.getId() == null) {
 			throw new SpellUpdateException("spell id is null");
 		}
+		input.getComponents().forEach(_component -> _component.setSpell(input));
+		input.getClassRanks().forEach(_classRank -> _classRank.setSpell(input));
 		Spell result = this.spellRepository.save(input);
 		log.info("Spell {} was updated: {}", result.getId(), result);
 		return result;

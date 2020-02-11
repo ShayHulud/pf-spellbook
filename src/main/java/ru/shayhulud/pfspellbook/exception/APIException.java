@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Main class of API exception.
@@ -17,7 +18,7 @@ public class APIException extends Exception {
 	public APIException(Map<String, String> errors) {
 		super(errors.entrySet().stream()
 			.map(_entry -> _entry.getKey() + ":" + _entry.getValue())
-			.reduce("", (s, s2) -> String.join(";", s, s2))
+			.collect(Collectors.joining(";"))
 		);
 		this.errors = Collections.unmodifiableMap(errors);
 	}

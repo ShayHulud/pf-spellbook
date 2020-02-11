@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link href="./lib/bulma.min.css" rel="stylesheet"/>
-    <link href="./css/spellcard.css" rel="stylesheet">
+    <link href="/lib/bulma.min.css" rel="stylesheet"/>
+    <link href="/css/spellcard.css" rel="stylesheet">
     <title>${spell.name}</title>
     <script src="https://kit.fontawesome.com/ee8c5603b4.js" crossorigin="anonymous"></script>
 </head>
