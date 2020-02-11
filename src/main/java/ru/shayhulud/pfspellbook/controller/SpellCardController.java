@@ -30,7 +30,7 @@ public class SpellCardController {
 
 	private final SpellCardConverter spellCardConverter;
 
-	@GetMapping({"/", "/hello"})
+	@GetMapping("/hello")
 	public String example(Model model) {
 
 		Spell spell = new Spell(
