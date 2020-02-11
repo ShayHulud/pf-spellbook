@@ -65,23 +65,9 @@
             </p>
         </div>
         <div class="spell-params">
-            <%-- TODO: Сделать скрытие пустых параметров --%>
-            <%-- TODO: Сделать нормальный аппенд компонентов --%>
-            <div><b>Время сотворения</b>: ${spell.castTime}<br></div>
-            <div><b>Компоненты</b>: <c:forEach items="${spell.components}" var="spellComponent">${spellComponent.component.ruName}</c:forEach></div>
-            <div><b>Дистанция</b>: ${spell.distance}</div>
-            <div><b>Эффект</b>: ${spell.effect}<br></div>
-            <div><b>Цель</b>: ${spell.target}<br></div>
-            <div><b>Длительность</b>: ${spell.duration}<br></div>
-            <div><b>Спасбросок</b>: ${spell.savingThrow}<br></div>
-            <div><b>Устойчивость к магии</b>: <c:choose>
-                <c:when test="${spell.resistable}">
-                    Да
-                </c:when>
-                <c:otherwise>
-                    Нет
-                </c:otherwise>
-            </c:choose><br></div>
+            <c:forEach items="${spell.parameters}" var="spellParameters">
+                <div><b>${spellParameters.key}</b>: ${spellParameters.value}<br></div>
+            </c:forEach>
         </div>
     </div>
 
