@@ -17,10 +17,10 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionAdviser {
 
-	//TODO: add logs
 	@ExceptionHandler({NotFoundException.class})
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public Map<String, String> handle404(APIException e) {
+		log.error("Error during process request:", e);
 		return e.getErrors();
 	}
 }
