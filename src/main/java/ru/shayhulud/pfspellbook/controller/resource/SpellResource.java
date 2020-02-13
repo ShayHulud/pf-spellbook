@@ -71,7 +71,9 @@ public class SpellResource {
 	})
 	public Spell update(@RequestBody Spell spell) throws SpellUpdateException {
 		log.debug("REST request to update Spell : {}", spell);
-		return this.spellService.updateSpell(spell);
+		Spell updated = this.spellService.updateSpell(spell);
+		return updated;
+
 	}
 
 	@GetMapping("/api/spell/{id}")

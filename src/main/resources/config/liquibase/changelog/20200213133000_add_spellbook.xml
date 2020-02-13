@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="20200213133000-1" author="ShayHulud">
+        <createTable tableName="spellbook">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <dropDefaultValue tableName="spellbook" columnName="created_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spellbook" columnName="updated_at" columnDataType="datetime"/>
+    </changeSet>
+
+    <changeSet id="20200213133000-2" author="ShayHulud">
+
+        <createTable tableName="spellbook_spell">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="spellbook_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+            <column name="spell_id" type="bigint">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addPrimaryKey columnNames="id, spellbook_id, spell_id" tableName="spellbook_spell"/>
+    </changeSet>
+
+    <changeSet id="20200213133000-3" author="ShayHulud">
+        <addForeignKeyConstraint
+                constraintName="fk_spellbook_spell_spellbook"
+                baseTableName="spellbook_spell"
+                baseColumnNames="spellbook_id"
+                referencedTableName="spellbook"
+                referencedColumnNames="id"/>
+        <addForeignKeyConstraint
+                constraintName="fk_spellbook_spell_spell"
+                baseTableName="spellbook_spell"
+                baseColumnNames="spell_id"
+                referencedTableName="spell"
+                referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>

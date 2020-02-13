@@ -39,7 +39,9 @@ public class SpellService {
 		}
 		input.getComponents().forEach(_component -> _component.setSpell(input));
 		input.getClassRanks().forEach(_classRank -> _classRank.setSpell(input));
-		Spell result = this.spellRepository.save(input);
+		this.spellRepository.saveAndFlush(input);
+		//TODO: make all fields of entity returnable (problem with created)
+		Spell result = this.spellRepository.getById(input.getId()).get();
 		log.info("Spell {} was updated: {}", result.getId(), result);
 		return result;
 	}

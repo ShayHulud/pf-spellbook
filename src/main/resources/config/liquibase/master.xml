@@ -14,4 +14,6 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200213133000_add_spellbook.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200213150500_add_created_updated_to_spell_and_components.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

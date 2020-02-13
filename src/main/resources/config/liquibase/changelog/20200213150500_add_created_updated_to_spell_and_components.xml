@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet id="20200213150500-1" author="ShayHulud">
+        <addColumn tableName="spell">
+            <column name="created_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="spell_class_rank">
+            <column name="created_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+        <addColumn tableName="spell_component">
+            <column name="created_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+            <column name="updated_at" type="datetime">
+                <constraints nullable="true"/>
+            </column>
+        </addColumn>
+
+        <dropDefaultValue tableName="spell" columnName="created_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spell" columnName="updated_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spell_class_rank" columnName="created_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spell_class_rank" columnName="updated_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spell_component" columnName="created_at" columnDataType="datetime"/>
+        <dropDefaultValue tableName="spell_component" columnName="updated_at" columnDataType="datetime"/>
+    </changeSet>
+</databaseChangeLog>
