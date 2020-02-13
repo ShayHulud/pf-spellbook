@@ -1,5 +1,6 @@
 package ru.shayhulud.pfspellbook.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,12 +47,14 @@ public class Spell implements Serializable {
 	@Column(name = "sub_school")
 	private String subSchool;
 
+	@JsonIgnoreProperties({"spell"})
 	@OneToMany(mappedBy = "spell", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<SpellClassRank> classRanks;
 
 	@Column(name = "cast_time")
 	private String castTime;
 
+	@JsonIgnoreProperties({"spell"})
 	@OneToMany(mappedBy = "spell", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<SpellComponent> components;
 

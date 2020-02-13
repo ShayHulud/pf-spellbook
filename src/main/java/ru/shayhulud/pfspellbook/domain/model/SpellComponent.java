@@ -3,6 +3,7 @@ package ru.shayhulud.pfspellbook.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.shayhulud.pfspellbook.domain.enumiration.Component;
 
@@ -27,6 +28,7 @@ import javax.persistence.Table;
 @Table(name = "spell_component")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"spell"})
 public class SpellComponent implements Serializable {
 
 	@Id

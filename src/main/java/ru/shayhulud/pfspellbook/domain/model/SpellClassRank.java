@@ -3,6 +3,7 @@ package ru.shayhulud.pfspellbook.domain.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import ru.shayhulud.pfspellbook.domain.enumiration.PlayClass;
 
@@ -27,6 +28,7 @@ import javax.persistence.Table;
 @Table(name = "spell_class_rank")
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"spell"})
 public class SpellClassRank implements Serializable {
 
 	@Id
