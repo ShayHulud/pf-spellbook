@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -90,6 +91,19 @@ public class SpellResource {
 	public Spell getById(@PathVariable Long id) throws NotFoundException {
 		log.debug("REST request to get Spell {}", id);
 		return this.spellService.getById(id);
+	}
+
+	@DeleteMapping("/api/spell/{id}")
+	@ApiOperation("Delete spell by id")
+	@ApiResponses({
+		@ApiResponse(
+			code = 204,
+			message = "Success"
+		)
+	})
+	public void delete(@PathVariable("id") Long id) {
+		log.debug("REST request to delete Spell {}", id);
+		this.spellService.delete(id);
 	}
 
 	@ExceptionHandler({SpellUpdateException.class})

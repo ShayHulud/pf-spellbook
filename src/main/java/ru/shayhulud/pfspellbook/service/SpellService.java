@@ -49,4 +49,15 @@ public class SpellService {
 		return this.spellRepository.getById(id)
 			.orElseThrow(() -> new NotFoundException("spell"));
 	}
+
+	@Transactional
+	public void delete(Long id) {
+		try {
+			Spell spell = this.getById(id);
+			this.spellRepository.delete(spell);
+			log.info("Spell with id {} was deleted successfully", id);
+		} catch (NotFoundException e) {
+			log.warn(e.getMessage());
+		}
+	}
 }
