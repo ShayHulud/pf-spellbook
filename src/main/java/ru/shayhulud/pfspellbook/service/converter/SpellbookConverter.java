@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.shayhulud.pfspellbook.common.behavior.Converter;
 import ru.shayhulud.pfspellbook.common.util.DateUtils;
-import ru.shayhulud.pfspellbook.domain.dto.SpellbookDTO;
+import ru.shayhulud.pfspellbook.domain.dto.spellbook.SpellbookDTO;
 import ru.shayhulud.pfspellbook.domain.model.Spellbook;
 
 /**

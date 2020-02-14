@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import ru.shayhulud.pfspellbook.domain.dto.SpellDTO;
-import ru.shayhulud.pfspellbook.domain.model.Spell;
 import ru.shayhulud.pfspellbook.exception.APIException;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
 import ru.shayhulud.pfspellbook.exception.spell.SpellCreationException;
@@ -53,10 +52,10 @@ public class SpellResource {
 	})
 	public SpellDTO create(@RequestBody SpellDTO spell) throws SpellCreationException {
 		log.debug("REST request to create Spell : {}", spell);
-		return this.spellService.createSpell(spell);
+		return this.spellService.create(spell);
 	}
 
-	@PutMapping("/api/spell")
+	@PutMapping("/api/spell/{id}")
 	@ApiOperation("Update spell")
 	@ApiResponses({
 		@ApiResponse(
@@ -76,9 +75,12 @@ public class SpellResource {
 			response = String.class, responseContainer = "Map"
 		)
 	})
-	public SpellDTO update(@RequestBody SpellDTO spell) throws SpellUpdateException, NotFoundException {
+	public SpellDTO update(@PathVariable("id") Long id, @RequestBody SpellDTO spell)
+		throws SpellUpdateException, NotFoundException {
+
+		spell.setId(id);
 		log.debug("REST request to update Spell : {}", spell);
-		return this.spellService.updateSpell(spell);
+		return this.spellService.update(spell);
 
 	}
 
@@ -96,7 +98,7 @@ public class SpellResource {
 			response = String.class, responseContainer = "Map"
 		)
 	})
-	public Spell getById(@PathVariable Long id) throws NotFoundException {
+	public SpellDTO getById(@PathVariable Long id) throws NotFoundException {
 		log.debug("REST request to get Spell {}", id);
 		return this.spellService.getById(id);
 	}

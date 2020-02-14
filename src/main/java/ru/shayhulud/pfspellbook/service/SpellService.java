@@ -34,10 +34,11 @@ public class SpellService {
 	private final SpellComponentConverter spellComponentConverter;
 
 	@Transactional
-	public SpellDTO createSpell(SpellDTO input) throws SpellCreationException {
+	public SpellDTO create(SpellDTO input) throws SpellCreationException {
 		if (input.getId() != null) {
 			throw new SpellCreationException("spell id exists");
 		}
+		input.setName(input.getName().toUpperCase());
 		Spell newSpell = this.spellConverter.fromDTO(input);
 		newSpell.getClassRanks().forEach(_cr -> _cr.setId(null));
 		newSpell.getComponents().forEach(_cr -> _cr.setId(null));
@@ -47,14 +48,15 @@ public class SpellService {
 	}
 
 	@Transactional
-	public SpellDTO updateSpell(SpellDTO input) throws SpellUpdateException, NotFoundException {
+	public SpellDTO update(SpellDTO input) throws SpellUpdateException, NotFoundException {
 		if (input.getId() == null) {
 			throw new SpellUpdateException("spell id is null");
 		}
+		input.setName(input.getName().toUpperCase());
 
 		Spell spell = this.spellRepository.getById(input.getId()).orElseThrow(() -> new NotFoundException("spell"));
 
-		Spell possibleSameNameSpell = this.spellRepository.getByName(input.getName()).orElse(null);
+		Spell possibleSameNameSpell = this.spellRepository.getByNameIgnoreCase(input.getName()).orElse(null);
 		if (possibleSameNameSpell != null
 			&& !possibleSameNameSpell.getId().equals(spell.getId())) {
 			throw new SpellUpdateException("spell name already exists {}");
@@ -104,15 +106,31 @@ public class SpellService {
 	}
 
 	@Transactional
-	public Spell getById(Long id) throws NotFoundException {
+	public Spell getEntityById(Long id) throws NotFoundException {
 		return this.spellRepository.getById(id)
 			.orElseThrow(() -> new NotFoundException("spell"));
 	}
 
 	@Transactional
+	public SpellDTO getById(Long id) throws NotFoundException {
+		return this.spellConverter.toDTO(this.getEntityById(id));
+	}
+
+	@Transactional
+	public Spell getEntityByName(String name) throws NotFoundException {
+		return this.spellRepository.getByNameIgnoreCase(name)
+			.orElseThrow(() -> new NotFoundException("spell"));
+	}
+
+	@Transactional
+	public SpellDTO getByName(String name) throws NotFoundException {
+		return this.spellConverter.toDTO(this.getEntityByName(name));
+	}
+
+	@Transactional
 	public void delete(Long id) {
 		try {
-			Spell spell = this.getById(id);
+			Spell spell = this.getEntityById(id);
 			this.spellRepository.delete(spell);
 			log.info("Spell with id {} was deleted successfully", id);
 		} catch (NotFoundException e) {

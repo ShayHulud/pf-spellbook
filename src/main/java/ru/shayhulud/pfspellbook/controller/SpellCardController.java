@@ -44,7 +44,7 @@ public class SpellCardController {
 		)
 	})
 	public String example(Model model, @PathVariable("id") Long id) throws NotFoundException {
-		Spell spell = this.spellService.getById(id);
+		Spell spell = this.spellService.getEntityById(id);
 		SpellCardRenderDTO renderDTO = this.spellCardConverter.convertSpellForRender(spell);
 		model.addAttribute("spell", renderDTO);
 		return "spell-card";

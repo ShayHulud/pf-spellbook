@@ -1,8 +1,9 @@
-package ru.shayhulud.pfspellbook.domain.dto;
+package ru.shayhulud.pfspellbook.domain.dto.spellbook;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.shayhulud.pfspellbook.domain.dto.SpellDTO;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
