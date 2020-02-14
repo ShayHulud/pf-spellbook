@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.shayhulud.pfspellbook.domain.model.Spell;
 import ru.shayhulud.pfspellbook.domain.render.SpellCardRenderDTO;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
-import ru.shayhulud.pfspellbook.service.SpellCardConverter;
+import ru.shayhulud.pfspellbook.service.SpellCardRenderer;
 import ru.shayhulud.pfspellbook.service.SpellService;
 
 /**
@@ -25,7 +25,7 @@ import ru.shayhulud.pfspellbook.service.SpellService;
 @Api(value = "/api/spell", tags = {"spell"})
 public class SpellCardController {
 
-	private final SpellCardConverter spellCardConverter;
+	private final SpellCardRenderer spellCardConverter;
 	private final SpellService spellService;
 
 	@GetMapping("/api/spell/{id}/render")

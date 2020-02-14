@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Converter spell to spellCard.
  */
 @Service
-public class SpellCardConverter {
+public class SpellCardRenderer {
 
 	@Transactional
 	public SpellCardRenderDTO convertSpellForRender(Spell spell) {

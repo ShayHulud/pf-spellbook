@@ -42,7 +42,7 @@ public class Spellbook implements Serializable {
 
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "created_at")
+	@Column(name = "created_at", updatable = false)
 	private Date createdAt;
 
 	@UpdateTimestamp
@@ -63,5 +63,15 @@ public class Spellbook implements Serializable {
 			", name='" + getName() + "'" +
 			", spells='" + getSpells().stream().map(Spell::getId) + "'" +
 			"}";
+	}
+
+	public Spellbook addSpell(Spell spell) {
+		this.spells.add(spell);
+		return this;
+	}
+
+	public Spellbook removeSpell(Spell spell) {
+		this.spells.remove(spell);
+		return this;
 	}
 }

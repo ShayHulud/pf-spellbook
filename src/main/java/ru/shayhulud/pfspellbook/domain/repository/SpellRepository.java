@@ -13,4 +13,6 @@ import java.util.Optional;
 public interface SpellRepository extends JpaRepository<Spell, Long> {
 
 	Optional<Spell> getById(Long id);
+
+	Optional<Spell> getByName(String name);
 }

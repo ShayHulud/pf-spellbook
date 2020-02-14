@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.shayhulud.pfspellbook.domain.dto.SpellDTO;
 import ru.shayhulud.pfspellbook.domain.model.Spell;
 import ru.shayhulud.pfspellbook.exception.APIException;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
@@ -50,7 +51,7 @@ public class SpellResource {
 			response = String.class, responseContainer = "Map"
 		)
 	})
-	public Spell create(@RequestBody Spell spell) throws SpellCreationException {
+	public SpellDTO create(@RequestBody SpellDTO spell) throws SpellCreationException {
 		log.debug("REST request to create Spell : {}", spell);
 		return this.spellService.createSpell(spell);
 	}
@@ -67,12 +68,17 @@ public class SpellResource {
 			message = "Bad request. Possible error key\n" +
 				"* " + SpellUpdateException.ERROR_TEXT,
 			response = String.class, responseContainer = "Map"
+		),
+		@ApiResponse(
+			code = 404,
+			message = "Spell with this id not found. Possible error key\n" +
+				"* " + NotFoundException.ERROR_TEXT,
+			response = String.class, responseContainer = "Map"
 		)
 	})
-	public Spell update(@RequestBody Spell spell) throws SpellUpdateException {
+	public SpellDTO update(@RequestBody SpellDTO spell) throws SpellUpdateException, NotFoundException {
 		log.debug("REST request to update Spell : {}", spell);
-		Spell updated = this.spellService.updateSpell(spell);
-		return updated;
+		return this.spellService.updateSpell(spell);
 
 	}
 
