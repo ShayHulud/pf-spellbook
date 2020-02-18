@@ -11,14 +11,16 @@ import ru.shayhulud.pfspellbook.domain.model.SpellClassRank;
 import ru.shayhulud.pfspellbook.domain.repository.SpellRepository;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
 import ru.shayhulud.pfspellbook.exception.spell.SpellCreationException;
+import ru.shayhulud.pfspellbook.exception.spell.SpellNotFoundException;
 import ru.shayhulud.pfspellbook.exception.spell.SpellUpdateException;
 import ru.shayhulud.pfspellbook.service.converter.SpellClassRankConverter;
 import ru.shayhulud.pfspellbook.service.converter.SpellComponentConverter;
 import ru.shayhulud.pfspellbook.service.converter.SpellConverter;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Spell manage service.
@@ -54,7 +56,7 @@ public class SpellService {
 		}
 		input.setName(input.getName().toUpperCase());
 
-		Spell spell = this.spellRepository.getById(input.getId()).orElseThrow(() -> new NotFoundException("spell"));
+		Spell spell = this.spellRepository.getById(input.getId()).orElseThrow(SpellNotFoundException::new);
 
 		Spell possibleSameNameSpell = this.spellRepository.getByNameIgnoreCase(input.getName()).orElse(null);
 		if (possibleSameNameSpell != null
@@ -71,15 +73,13 @@ public class SpellService {
 		});
 
 		//merge class ranks
-		Map<PlayClass, SpellClassRank> prevClassRanks = new HashMap<>();
-		spell.getClassRanks()
-			.forEach(_scr -> prevClassRanks.put(_scr.getPlayClass(), _scr));
+		Map<PlayClass, SpellClassRank> prevClassRanks = spell.getClassRanks().stream()
+			.collect(Collectors.toMap(SpellClassRank::getPlayClass, Function.identity()));
 
-		Map<PlayClass, SpellClassRank> forUpdateClassRanks = new HashMap<>();
-		input.getClassRanks().stream()
+		Map<PlayClass, SpellClassRank> forUpdateClassRanks = input.getClassRanks().stream()
 			.filter(_scr -> _scr.getId() != null)
 			.map(this.spellClassRankConverter::fromDTO)
-			.forEach(_scr -> forUpdateClassRanks.put(_scr.getPlayClass(), _scr));
+			.collect(Collectors.toMap(SpellClassRank::getPlayClass, Function.identity()));
 
 		spell.getClassRanks().clear();
 
@@ -108,7 +108,7 @@ public class SpellService {
 	@Transactional
 	public Spell getEntityById(Long id) throws NotFoundException {
 		return this.spellRepository.getById(id)
-			.orElseThrow(() -> new NotFoundException("spell"));
+			.orElseThrow(SpellNotFoundException::new);
 	}
 
 	@Transactional
@@ -119,7 +119,7 @@ public class SpellService {
 	@Transactional
 	public Spell getEntityByName(String name) throws NotFoundException {
 		return this.spellRepository.getByNameIgnoreCase(name)
-			.orElseThrow(() -> new NotFoundException("spell"));
+			.orElseThrow(SpellNotFoundException::new);
 	}
 
 	@Transactional

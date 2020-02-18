@@ -31,13 +31,13 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Api(value = "/api/spell", tags = {"spell", "CRUD"})
+@Api(value = "/api/spell", tags = "spell")
 public class SpellResource {
 
 	private final SpellService spellService;
 
 	@PostMapping("/api/spell")
-	@ApiOperation("Create new spell")
+	@ApiOperation(value = "Create new spell", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -56,7 +56,7 @@ public class SpellResource {
 	}
 
 	@PutMapping("/api/spell/{id}")
-	@ApiOperation("Update spell")
+	@ApiOperation(value = "Update spell", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -85,7 +85,7 @@ public class SpellResource {
 	}
 
 	@GetMapping("/api/spell/{id}")
-	@ApiOperation("Get spell by id")
+	@ApiOperation(value = "Get spell by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -104,7 +104,7 @@ public class SpellResource {
 	}
 
 	@DeleteMapping("/api/spell/{id}")
-	@ApiOperation("Delete spell by id")
+	@ApiOperation(value = "Delete spell by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 204,

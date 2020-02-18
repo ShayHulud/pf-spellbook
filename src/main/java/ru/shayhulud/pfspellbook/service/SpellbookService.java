@@ -12,6 +12,7 @@ import ru.shayhulud.pfspellbook.domain.model.Spellbook;
 import ru.shayhulud.pfspellbook.domain.repository.SpellRepository;
 import ru.shayhulud.pfspellbook.domain.repository.SpellbookRepository;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
+import ru.shayhulud.pfspellbook.exception.spellbook.SpellbookNotFoundException;
 import ru.shayhulud.pfspellbook.exception.spellbook.SpellbookUpdateException;
 import ru.shayhulud.pfspellbook.service.converter.SpellbookConverter;
 
@@ -50,7 +51,7 @@ public class SpellbookService {
 			throw new SpellbookUpdateException("id is null");
 		}
 		Spellbook spellbook = this.spellbookRepository.getById(dto.getId())
-			.orElseThrow(() -> new NotFoundException("spellbook"));
+			.orElseThrow(SpellbookNotFoundException::new);
 
 		spellbook.setName(dto.getName());
 
@@ -67,7 +68,7 @@ public class SpellbookService {
 	@Transactional
 	public SpellbookDTO addSpellToSpellbook(Long spellbookId, String spellName) throws NotFoundException {
 		Spellbook spellbook = this.spellbookRepository.getById(spellbookId)
-			.orElseThrow(() -> new NotFoundException("spellbook"));
+			.orElseThrow(SpellbookNotFoundException::new);
 		Spell desiredSpell = this.spellService.getEntityByName(spellName.toUpperCase());
 		spellbook.addSpell(desiredSpell);
 		Spellbook updated = this.spellbookRepository.save(spellbook);
@@ -79,7 +80,7 @@ public class SpellbookService {
 	@Transactional
 	public SpellbookDTO removeSpellFromSpellbook(Long spellbookId, String spellName) throws NotFoundException {
 		Spellbook spellbook = this.spellbookRepository.getById(spellbookId)
-			.orElseThrow(() -> new NotFoundException("spellbook"));
+			.orElseThrow(SpellbookNotFoundException::new);
 		try {
 			Spell desiredSpell = this.spellService.getEntityByName(spellName.toUpperCase());
 			spellbook.removeSpell(desiredSpell);
@@ -101,7 +102,7 @@ public class SpellbookService {
 	@Transactional
 	public Spellbook getEntityById(Long id) throws NotFoundException {
 		return this.spellbookRepository.getById(id)
-			.orElseThrow(() -> new NotFoundException("spellbook"));
+			.orElseThrow(SpellbookNotFoundException::new);
 	}
 
 	@Transactional

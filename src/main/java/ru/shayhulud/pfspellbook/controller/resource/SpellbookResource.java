@@ -32,13 +32,13 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Api(value = "/api/spellbook", tags = {"spellbook", "CRUD"})
+@Api(value = "/api/spellbook", tags = "spellbook")
 public class SpellbookResource {
 
 	private final SpellbookService spellbookService;
 
 	@PostMapping("/api/spellbook")
-	@ApiOperation("Create new spellbook")
+	@ApiOperation(value = "Create new spellbook", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -51,7 +51,7 @@ public class SpellbookResource {
 	}
 
 	@PutMapping("/api/spellbook/{id}")
-	@ApiOperation("Update spellbook")
+	@ApiOperation(value = "Update spellbook", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -80,7 +80,7 @@ public class SpellbookResource {
 	}
 
 	@GetMapping("/api/spellbook/{id}")
-	@ApiOperation("Get spell by id")
+	@ApiOperation(value = "Get spellbook by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -99,7 +99,7 @@ public class SpellbookResource {
 	}
 
 	@DeleteMapping("/api/spellbook/{id}")
-	@ApiOperation("Delete spellbook by id")
+	@ApiOperation(value = "Delete spellbook by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 204,

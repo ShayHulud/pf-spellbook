@@ -12,8 +12,10 @@ public class NotFoundException extends APIException {
 	 */
 	public static final String ERROR_TEXT = "not_found";
 
-	public NotFoundException(String text) {
-		super(ERROR_TEXT, text);
+	protected static final String MODEL_NAME = "object";
+
+	protected NotFoundException(String modelName) {
+		super(ERROR_TEXT, modelName);
 	}
 
 	protected NotFoundException(Set<String> troubleElements) {
