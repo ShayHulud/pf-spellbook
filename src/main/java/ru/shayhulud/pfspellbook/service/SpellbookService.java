@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.shayhulud.pfspellbook.domain.dto.spellbook.CreateSpellbookDTO;
 import ru.shayhulud.pfspellbook.domain.dto.spellbook.SpellbookDTO;
 import ru.shayhulud.pfspellbook.domain.dto.spellbook.UpdateSpellbookDTO;
 import ru.shayhulud.pfspellbook.domain.model.Spell;
@@ -34,9 +35,9 @@ public class SpellbookService {
 	private final SpellService spellService;
 
 	@Transactional
-	public SpellbookDTO create(String name) {
+	public SpellbookDTO create(CreateSpellbookDTO dto) {
 		Spellbook spellbook = new Spellbook();
-		spellbook.setName(name);
+		spellbook.setName(dto.getName().toUpperCase());
 		Spellbook created = this.spellbookRepository.save(spellbook);
 		return this.spellbookConverter.toDTO(created);
 	}
@@ -79,12 +80,17 @@ public class SpellbookService {
 	public SpellbookDTO removeSpellFromSpellbook(Long spellbookId, String spellName) throws NotFoundException {
 		Spellbook spellbook = this.spellbookRepository.getById(spellbookId)
 			.orElseThrow(() -> new NotFoundException("spellbook"));
-		Spell desiredSpell = this.spellService.getEntityByName(spellName.toUpperCase());
-		spellbook.removeSpell(desiredSpell);
-		Spellbook updated = this.spellbookRepository.save(spellbook);
-		log.info("Spell: {}:{} was removed from spellbook {}",
-			desiredSpell.getId(), desiredSpell.getName(), updated.getId());
-		return this.spellbookConverter.toDTO(updated);
+		try {
+			Spell desiredSpell = this.spellService.getEntityByName(spellName.toUpperCase());
+			spellbook.removeSpell(desiredSpell);
+			Spellbook updated = this.spellbookRepository.save(spellbook);
+			log.info("Spell: {}:{} was removed from spellbook {}",
+				desiredSpell.getId(), desiredSpell.getName(), updated.getId());
+			return this.spellbookConverter.toDTO(updated);
+		} catch (NotFoundException e) {
+			log.warn("Spell with name {} was not found, nothing to remove from spellbook", spellName);
+			return this.spellbookConverter.toDTO(spellbook);
+		}
 	}
 
 	@Transactional

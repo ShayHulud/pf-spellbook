@@ -1,4 +1,4 @@
-package ru.shayhulud.pfspellbook.controller;
+package ru.shayhulud.pfspellbook.controller.web;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
