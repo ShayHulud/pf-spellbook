@@ -16,28 +16,42 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.shayhulud.pfspellbook.domain.dto.SpellDTO;
+import ru.shayhulud.pfspellbook.domain.dto.spellbook.CreateSpellbookDTO;
+import ru.shayhulud.pfspellbook.domain.dto.spellbook.SpellbookDTO;
+import ru.shayhulud.pfspellbook.domain.dto.spellbook.UpdateSpellbookDTO;
 import ru.shayhulud.pfspellbook.exception.APIException;
 import ru.shayhulud.pfspellbook.exception.NotFoundException;
-import ru.shayhulud.pfspellbook.exception.spell.SpellCreationException;
-import ru.shayhulud.pfspellbook.exception.spell.SpellUpdateException;
-import ru.shayhulud.pfspellbook.service.SpellService;
+import ru.shayhulud.pfspellbook.exception.spellbook.SpellbookUpdateException;
+import ru.shayhulud.pfspellbook.service.SpellbookService;
 
 import java.util.Map;
 
 /**
- * Resource for managing spell library.
+ * Resource for managing spellbook library.
  */
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@Api(value = "/api/spell", tags = "spell")
-public class SpellResource {
+@Api(value = "/api/spellbook", tags = "spellbook")
+public class SpellbookResource {
 
-	private final SpellService spellService;
+	private final SpellbookService spellbookService;
 
-	@PostMapping("/api/spell")
-	@ApiOperation(value = "Create new spell", tags = "CRUD")
+	@PostMapping("/api/spellbook")
+	@ApiOperation(value = "Create new spellbook", tags = "CRUD")
+	@ApiResponses({
+		@ApiResponse(
+			code = 200,
+			message = "Success"
+		)
+	})
+	public SpellbookDTO create(@RequestBody CreateSpellbookDTO dto) {
+		log.debug("REST request to create Spellbook : {}", dto);
+		return this.spellbookService.create(dto);
+	}
+
+	@PutMapping("/api/spellbook/{id}")
+	@ApiOperation(value = "Update spellbook", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -46,46 +60,27 @@ public class SpellResource {
 		@ApiResponse(
 			code = 400,
 			message = "Bad request. Possible error key\n" +
-				"* " + SpellCreationException.ERROR_TEXT,
-			response = String.class, responseContainer = "Map"
-		)
-	})
-	public SpellDTO create(@RequestBody SpellDTO spell) throws SpellCreationException {
-		log.debug("REST request to create Spell : {}", spell);
-		return this.spellService.create(spell);
-	}
-
-	@PutMapping("/api/spell/{id}")
-	@ApiOperation(value = "Update spell", tags = "CRUD")
-	@ApiResponses({
-		@ApiResponse(
-			code = 200,
-			message = "Success"
-		),
-		@ApiResponse(
-			code = 400,
-			message = "Bad request. Possible error key\n" +
-				"* " + SpellUpdateException.ERROR_TEXT,
+				"* " + SpellbookUpdateException.ERROR_TEXT,
 			response = String.class, responseContainer = "Map"
 		),
 		@ApiResponse(
 			code = 404,
-			message = "Spell with this id not found. Possible error key\n" +
+			message = "Spellbook with this id not found. Possible error key\n" +
 				"* " + NotFoundException.ERROR_TEXT,
 			response = String.class, responseContainer = "Map"
 		)
 	})
-	public SpellDTO update(@PathVariable("id") Long id, @RequestBody SpellDTO spell)
-		throws SpellUpdateException, NotFoundException {
+	public SpellbookDTO update(@PathVariable("id") Long id, @RequestBody UpdateSpellbookDTO spellbook)
+		throws NotFoundException, SpellbookUpdateException {
 
-		spell.setId(id);
-		log.debug("REST request to update Spell : {}", spell);
-		return this.spellService.update(spell);
+		spellbook.setId(id);
+		log.debug("REST request to update Spellbook : {}", spellbook);
+		return this.spellbookService.update(spellbook);
 
 	}
 
-	@GetMapping("/api/spell/{id}")
-	@ApiOperation(value = "Get spell by id", tags = "CRUD")
+	@GetMapping("/api/spellbook/{id}")
+	@ApiOperation(value = "Get spellbook by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 200,
@@ -93,18 +88,18 @@ public class SpellResource {
 		),
 		@ApiResponse(
 			code = 404,
-			message = "Spell with this id not found. Possible error key\n" +
+			message = "Spellbook with this id not found. Possible error key\n" +
 				"* " + NotFoundException.ERROR_TEXT,
 			response = String.class, responseContainer = "Map"
 		)
 	})
-	public SpellDTO getById(@PathVariable Long id) throws NotFoundException {
-		log.debug("REST request to get Spell {}", id);
-		return this.spellService.getById(id);
+	public SpellbookDTO getById(@PathVariable Long id) throws NotFoundException {
+		log.debug("REST request to get Spellbook {}", id);
+		return this.spellbookService.getById(id);
 	}
 
-	@DeleteMapping("/api/spell/{id}")
-	@ApiOperation(value = "Delete spell by id", tags = "CRUD")
+	@DeleteMapping("/api/spellbook/{id}")
+	@ApiOperation(value = "Delete spellbook by id", tags = "CRUD")
 	@ApiResponses({
 		@ApiResponse(
 			code = 204,
@@ -112,11 +107,11 @@ public class SpellResource {
 		)
 	})
 	public void delete(@PathVariable("id") Long id) {
-		log.debug("REST request to delete Spell {}", id);
-		this.spellService.delete(id);
+		log.debug("REST request to delete Spellbook {}", id);
+		this.spellbookService.delete(id);
 	}
 
-	@ExceptionHandler({SpellUpdateException.class})
+	@ExceptionHandler({SpellbookUpdateException.class})
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public Map<String, String> handle400(APIException e) {
 		log.error("Error during process request:", e);
