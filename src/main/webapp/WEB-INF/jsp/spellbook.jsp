@@ -6,10 +6,14 @@
 <head>
     <link href="/lib/bulma.min.css" rel="stylesheet"/>
     <link href="/css/spellcard.css" rel="stylesheet">
-    <title>${spell.name}</title>
+    <title>${spellbook.name}</title>
     <script src="https://kit.fontawesome.com/ee8c5603b4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<spell:card-render-template spell="${spell}"/>
+<div>
+    <c:forEach items="${spellbook.spells}" var="spell">
+        <spell:card-render-template spell="${spell}"/>
+    </c:forEach>
+</div>
 </body>
 </html>
