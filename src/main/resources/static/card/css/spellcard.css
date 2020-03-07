@@ -20,6 +20,10 @@
     display: flex;
 }
 
+.columns:not(:last-child) {
+    margin-bottom: 0;
+}
+
 .face {
     width: 210px;
     /*10cm x 72 dpi*/
