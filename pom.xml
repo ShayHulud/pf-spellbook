@@ -27,7 +27,7 @@
         <javax.validation-api.version>2.0.1.Final</javax.validation-api.version>
 
         <hibernate-java8.version>5.0.12.Final</hibernate-java8.version>
-        <postgresql.version>9.4-1206-jdbc4</postgresql.version>
+        <postgresql.version>42.3.7</postgresql.version>
         <hibernate-core.version>5.3.8.Final</hibernate-core.version>
         <javassist.version>3.23.2-GA</javassist.version>
         <liquibase.version>3.6.3</liquibase.version>
